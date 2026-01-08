@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Customer List{% endblock %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="display-4"><i class="bi bi-people"></i> Customer Management</h1>
+            <a href="/create" class="btn btn-success btn-lg">
+                <i class="bi bi-person-plus"></i> Add New Customer
+            </a>
+        </div>
+        <p class="lead text-muted">Manage and interact with your customers</p>
+    </div>
+</div>
+
+{% if customers %}
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0"><i class="bi bi-list-ul"></i> Customer Directory</h5>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers %}
+                    <tr>
+                        <td class="fw-bold">{{ customer.id }}</td>
+                        <td>{{ customer.name }}</td>
+                        <td><i class="bi bi-envelope"></i> {{ customer.email }}</td>
+                        <td><i class="bi bi-telephone"></i> {{ customer.phone }}</td>
+                        <td>{{ customer.address }}</td>
+                        <td class="text-center">
+                            <a href="/interact/{{ customer.id }}" class="btn btn-sm btn-primary">
+                                <i class="bi bi-chat-dots"></i> Interact
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-info text-center">
+    <i class="bi bi-info-circle"></i> No customers found. <a href="/create" class="alert-link">Add your first customer</a>
+</div>
+{% endif %}
+{% endblock content %}

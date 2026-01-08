@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Available Courses{% endblock %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h1 class="display-4"><i class="bi bi-book"></i> Online Courses</h1>
+        <p class="lead text-muted">Browse and enroll in available courses</p>
+    </div>
+</div>
+
+{% if courses %}
+<div class="row">
+    {% for course in courses %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-mortarboard"></i> {{ course.name }}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ course.description }}</p>
+                <p class="text-muted small"><i class="bi bi-calendar"></i> Published: {{ course.pub_date }}</p>
+            </div>
+            <div class="card-footer bg-light">
+                <a href="{% url 'course_details' course.id %}" class="btn btn-primary w-100">
+                    <i class="bi bi-arrow-right-circle"></i> View Course
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info text-center">
+    <i class="bi bi-info-circle"></i> No courses available at the moment.
+</div>
+{% endif %}
+{% endblock content %}

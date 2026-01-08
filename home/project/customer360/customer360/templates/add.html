@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add Customer{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0"><i class="bi bi-person-plus-fill"></i> Add New Customer</h4>
+            </div>
+            <div class="card-body">
+                {% if msg %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle-fill"></i> {{ msg }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endif %}
+                
+                <form method="post" action="/create/">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label"><i class="bi bi-person"></i> Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter customer name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label"><i class="bi bi-envelope"></i> Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="customer@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label"><i class="bi bi-telephone"></i> Phone</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="+1 234 567 8900" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label"><i class="bi bi-geo-alt"></i> Address</label>
+                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter customer address" required></textarea>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="bi bi-check-circle"></i> Add Customer
+                        </button>
+                        <a href="/" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

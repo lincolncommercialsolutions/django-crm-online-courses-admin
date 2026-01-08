@@ -1,0 +1,20 @@
+Criteria for Option 1: AI Graded Submission and Evaluation
+
+If you choose AI Graded Submission, you must provide GitHub URLs of your project files along with the required screenshots.
+
+    models.py – GitHub URL containing the Question, Choice, and Submission models. (3 points)
+    admin.py – GitHub URL with seven imported classes and the implementations of QuestionInline, ChoiceInline, QuestionAdmin, and LessonAdmin. (3 points)
+    03-admin-site – Screenshot of the admin site showing both the “Authentication and Authorization” section and the “OnlineCourse” section. (1 point)
+    course_details_bootstrap.html – GitHub URL showing the course detail page displaying the course name and all related lessons using Django template tags and Bootstrap. (2 points)
+    views.py – GitHub URL including the submit and show_exam_result functions. (2 points)
+    urls.py – GitHub URL containing the paths for submit and show_exam_result. (2 points)
+    07-final – Screenshot of a successful mock exam attempt showing the “Congratulations” message, score, and exam results. (2 points)
+
+Criteria for Option 2: Peer Graded Submission and Evaluation
+
+
+
+
+add an “Authentication and Authorization” section and “OnlineCourse" section on the same page. 
+
+Create a mock exam, make sure questions have no incorrect answers(all multiple choice), when exam is completed display popup message including "“Congratulations" message, score, and exam results. make sure its impossible to fail the mock exam. 

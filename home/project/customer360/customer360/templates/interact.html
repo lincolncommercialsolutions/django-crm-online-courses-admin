@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Interact with Customer{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0"><i class="bi bi-chat-dots-fill"></i> Record Customer Interaction</h4>
+            </div>
+            <div class="card-body">
+                {% if msg %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle-fill"></i> {{ msg }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endif %}
+                
+                <form method="post" action="#">
+                    {% csrf_token %}
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-bold"><i class="bi bi-broadcast"></i> Communication Channel</label>
+                        <div class="btn-group-vertical w-100" role="group">
+                            {% for channel in channels %}
+                            <input type="radio" class="btn-check" name="channel" id="channel{{ forloop.counter }}" value="{{ channel.0 }}" required>
+                            <label class="btn btn-outline-primary text-start" for="channel{{ forloop.counter }}">
+                                <i class="bi bi-{% if channel.0 == 'email' %}envelope{% elif channel.0 == 'phone' %}telephone{% elif channel.0 == 'chat' %}chat{% elif channel.0 == 'social' %}share{% else %}person{% endif %}"></i> 
+                                {{ channel.1 }}
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-bold"><i class="bi bi-arrow-left-right"></i> Direction</label>
+                        <div class="btn-group w-100" role="group">
+                            {% for direction in directions %}
+                            <input type="radio" class="btn-check" name="direction" id="direction{{ forloop.counter }}" value="{{ direction.0 }}" required>
+                            <label class="btn btn-outline-success" for="direction{{ forloop.counter }}">
+                                <i class="bi bi-arrow-{% if direction.0 == 'inbound' %}down{% else %}up{% endif %}-circle"></i> 
+                                {{ direction.1 }}
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="summary" class="form-label fw-bold"><i class="bi bi-journal-text"></i> Interaction Summary</label>
+                        <textarea class="form-control" id="summary" name="summary" rows="5" placeholder="Describe the interaction details..." required></textarea>
+                        <div class="form-text">Provide a detailed summary of the customer interaction</div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-info btn-lg text-white">
+                            <i class="bi bi-save"></i> Save Interaction
+                        </button>
+                        <a href="/" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> Back to Customers
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
