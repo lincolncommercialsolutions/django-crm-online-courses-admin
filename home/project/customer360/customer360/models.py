@@ -42,10 +42,29 @@ class Interaction(models.Model):
 
 
 # Online Course Models
+class Instructor(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    full_time = models.BooleanField(default=True)
+    total_learners = models.IntegerField(default=0)
+    
+    def __str__(self):
+        return self.user.username
+
+
+class Learner(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    occupation = models.CharField(max_length=200, default='Developer')
+    social_link = models.URLField(max_length=200, blank=True)
+    
+    def __str__(self):
+        return self.user.username
+
+
 class Course(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     pub_date = models.DateField(auto_now_add=True)
+    instructors = models.ManyToManyField(Instructor)
     
     def __str__(self):
         return self.name

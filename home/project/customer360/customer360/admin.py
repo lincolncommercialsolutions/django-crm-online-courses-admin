@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer, Interaction, Course, Lesson, Question, Choice, Submission
+from .models import Customer, Interaction, Course, Lesson, Question, Choice, Submission, Instructor, Learner
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 
@@ -42,12 +42,25 @@ class LessonAdmin(admin.ModelAdmin):
     inlines = [QuestionInline]
 
 
-@admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('name', 'pub_date')
     search_fields = ('name', 'description')
     inlines = [QuestionInline]
 
+
+@admin.register(Instructor)
+class InstructorAdmin(admin.ModelAdmin):
+    list_display = ('user', 'full_time', 'total_learners')
+    list_filter = ('full_time',)
+
+
+@admin.register(Learner)
+class LearnerAdmin(admin.ModelAdmin):
+    list_display = ('user', 'occupation')
+    search_fields = ('user__username', 'occupation')
+
+admin.site.register(Course, CourseAdmin)
+admin.site.register(Choice)
 
 @admin.register(Submission)
 class SubmissionAdmin(admin.ModelAdmin):

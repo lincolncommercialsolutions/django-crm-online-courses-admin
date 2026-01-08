@@ -33,13 +33,13 @@ CSRF_TRUSTED_ORIGINS = ['https://*.cognitiveclass.ai']
 # Application definition
 
 INSTALLED_APPS = [
+    'customer360.apps.Customer360Config',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'customer360'
 ]
 
 MIDDLEWARE = [
